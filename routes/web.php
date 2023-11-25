@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.index');
+})->name('home');
+Route::get('/shop' , function(){
+    return view('frontend.shop');
+})->name('shop');
 
 // =====================================================
 // ================= Dashboard Routes ==================
