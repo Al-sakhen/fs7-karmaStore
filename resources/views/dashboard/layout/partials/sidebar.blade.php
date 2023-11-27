@@ -14,8 +14,17 @@
                 <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                     alt="User Image">
             </div>
-            <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+            <div class="info d-flex align-items-center justify-content-between">
+                <a href="#" class="d-block">
+                    {{ auth()->user()->name }}
+                </a>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-sm btn-danger">
+                        logout
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -40,7 +49,10 @@
        with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.index') }}" @class(['nav-link', 'active' => request()->routeIs('dashboard.index')])>
+                    <a href="{{ route('dashboard.index') }}" @class([
+                        'nav-link',
+                        'active' => request()->routeIs('dashboard.index'),
+                    ])>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -48,7 +60,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.products') }}"  @class(['nav-link', 'active' => request()->routeIs('dashboard.products')])>
+                    <a href="{{ route('dashboard.products') }}" @class([
+                        'nav-link',
+                        'active' => request()->routeIs('dashboard.products'),
+                    ])>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Products

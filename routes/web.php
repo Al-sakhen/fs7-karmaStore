@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashbaord\DashboardController;
+use App\Http\Controllers\Dashbaord\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,51 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.index');
 })->name('home');
+
 Route::get('/shop' , function(){
     return view('frontend.shop');
 })->name('shop');
 
-// =====================================================
-// ================= Dashboard Routes ==================
-// =====================================================
-
-Route::prefix('dashboard-panel')->name('dashboard.')->group(function () {
-
-    Route::get('/', function () {
-        return view('dashboard.index');
-    })->name('index');
-
-    Route::get('/products', function () {
-        return view('dashboard.products');
-    })->name('products');
-});
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
+require __DIR__ . '/dashboard.php';
 require __DIR__ . '/auth.php';

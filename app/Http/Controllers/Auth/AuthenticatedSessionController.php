@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('frontend.auth.login');
     }
 
     /**
@@ -29,6 +29,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (auth()->user()->role == 'admin') {
+            return redirect()->intended(RouteServiceProvider::DASHBOARD);
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
