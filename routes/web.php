@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Dashbaord\DashboardController;
-use App\Http\Controllers\Dashbaord\ProductsController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
