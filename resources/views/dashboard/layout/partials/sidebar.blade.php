@@ -60,6 +60,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('dashboard.categories.index') }}" @class([
+                        'nav-link',
+                        'active' => request()->routeIs('dashboard.categories.index'),
+                    ])>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Categories
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('dashboard.products') }}" @class([
                         'nav-link',
                         'active' => request()->routeIs('dashboard.products'),
