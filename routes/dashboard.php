@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductsController;
@@ -19,6 +20,8 @@ Route::prefix('dashboard-panel')->middleware(['auth', 'checkAdmin'])->name('dash
      *  in 1 line 
      */
     Route::resource('categories', CategoryController::class); // 7 routes
+
+    Route::resource('brands', BrandController::class);
 });
 
 
