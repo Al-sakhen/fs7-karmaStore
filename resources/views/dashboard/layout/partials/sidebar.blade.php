@@ -82,9 +82,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.products') }}" @class([
+                    <a href="{{ route('dashboard.products.index') }}" @class([
                         'nav-link',
-                        'active' => request()->routeIs('dashboard.products'),
+                        'active' => request()->routeIs('dashboard.products.index'),
                     ])>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
