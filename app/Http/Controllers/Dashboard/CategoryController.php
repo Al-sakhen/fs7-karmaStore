@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $mainCategories = Category::with(['childrens'])->whereNull('parent_id')->get();
+        $mainCategories = Category::with(['childrens'])
+            ->whereNull('parent_id')->get();
         return view('dashboard.categories.index', compact('mainCategories'));
     }
 
@@ -91,10 +92,14 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $category = Category::find($id);
-
-        if($category->childrens->count() > 0){
+        if ($category->childrens->count() > 0) {
             return redirect()->route('dashboard.categories.index')->with('error', 'Can not delete this category because it has childrens');
         }
+        $productCount = $category->products->count();
+        if( $productCount > 0){
+            return redirect()->route('dashboard.categories.index')->with('error', "Can not delete this category because it has ($productCount) products");
+        }
+
         $category->delete();
         return redirect()->route('dashboard.categories.index')->with('success', 'Category deleted successfully');
     }

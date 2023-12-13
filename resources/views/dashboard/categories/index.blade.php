@@ -35,6 +35,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Status</th>
+                                <th>Products Count</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
@@ -50,6 +51,8 @@
                                         @else
                                             <span class="badge badge-danger">InActive</span>
                                         @endif
+                                    </td>
+                                    <td>
                                     </td>
                                     <td>
                                         {{-- {{ $category->created_at->toTimeString() }} --}}
@@ -82,6 +85,9 @@
                                                 @else
                                                     <span class="badge badge-danger">InActive</span>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                {{ $child->products_count }}
                                             </td>
                                             <td>
                                                 {{-- {{ $child->created_at->toTimeString() }} --}}

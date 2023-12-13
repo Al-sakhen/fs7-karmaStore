@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\FrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('home');
-
-Route::get('/shop' , function(){
-    return view('frontend.shop');
-})->name('shop');
-
+Route::controller(FrontController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/shop', 'shop')->name('shop');
+});
 
 
 
