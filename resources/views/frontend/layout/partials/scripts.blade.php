@@ -14,3 +14,25 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 <script src="{{ asset('front/js/gmaps.min.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
+
+{{-- toastr --}}
+<script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+
+
+<script>
+    // success messages
+    @if (session()->has('success'))
+        toastr.success('{{ session()->get('success') }}')
+    @endif
+    // error messages
+    @if (session()->has('error'))
+        toastr.error('{{ session()->get('error') }}')
+    @endif
+
+    //  error validation messages
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error('{{ $error }}')
+        @endforeach
+    @endif
+</script>

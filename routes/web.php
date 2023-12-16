@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\FrontController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::controller(FrontController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/shop', 'shop')->name('shop');
+    Route::get('/product/{id}' ,'showProduct')->name('product.show');
 });
 
-
+Route::controller(CartController::class)->prefix('cart')->name('cart.')->middleware('auth')->group(function() {
+    Route::get('/' ,'index')->name('index');
+    Route::get('/add/{id}' ,'addToCartSession')->name('addToSession');
+});
 
 
 

@@ -39,4 +39,14 @@ class FrontController extends Controller
             ->withQueryString();
         return view('frontend.shop', compact('mainCategories', 'products', 'brands'));
     }
+
+
+    public function showProduct($id)
+    {
+        $product = Product::find($id);
+        if(!$product) {
+            return redirect()->route('shop')->with('error', 'Product Not Found');
+        }
+        return view('frontend.single-product', compact('product'));
+    }
 }

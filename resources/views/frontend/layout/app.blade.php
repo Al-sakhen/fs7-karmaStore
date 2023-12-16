@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="{{ asset('front/css/ion.rangeSlider.skinFlat.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
+
+    {{-- toastr css --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
 </head>
 
 <body id="{{ request()->routeIs('shop') ? 'category' : '' }}">

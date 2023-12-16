@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-light main_box">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="index.html"><img src="{{ asset('front/img/logo.png') }}"
+                <a class="navbar-brand logo_h" href="{{ route('home') }}"><img src="{{ asset('front/img/logo.png') }}"
                         alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,45 +14,31 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="ml-auto nav navbar-nav menu_nav">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-haspopup="true" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                                <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                                <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-                                <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-haspopup="true" aria-expanded="false">Blog</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li @class(['nav-item', 'active' => request()->routeIs('home')])><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+                        <li @class(['nav-item', 'active' => request()->routeIs('shop')])><a class="nav-link" href="{{ route('shop') }}">Shop</a></li>
                         @auth
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <input type="submit" class="btn btn-sm btn-danger" value="Logout">
-                            </form>
-                        </li>
+                            <li class="nav-item">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <input type="submit" class="btn btn-sm btn-danger" value="Logout">
+                                </form>
+                            </li>
                         @endauth
                         @guest
-                        <li class="nav-item">
-                            <a class="btn btn-sm btn-success" href="{{ route('login') }}">Login</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-success" href="{{ route('login') }}">Login</a>
+                            </li>
                         @endguest
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+                        @auth
+                            <li class="nav-item"><a href="{{ route('cart.index') }}" class="cart"><span
+                                        class="ti-bag"></span></a></li>
+                        @endauth
+                        @guest
+                            <li class="nav-item"><a href="{{ route('login') }}" class="cart"><span
+                                        class="ti-bag"></span></a></li>
+                        @endguest
                         <li class="nav-item">
                             <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                         </li>
