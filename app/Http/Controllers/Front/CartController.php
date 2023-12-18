@@ -37,6 +37,7 @@ class CartController extends Controller
         // -------------------- check if product exists in cart -------------------- 
         if (!array_key_exists($product->id, $cart)) {
             $cart[$product->id] = [
+                'id' => $product->id,
                 'title' => $product->title,
                 'price' => $product->discount_price ?? $product->price,
                 'quantity' => 1,
