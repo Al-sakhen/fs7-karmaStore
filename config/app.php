@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\PaypalClientProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -159,6 +160,7 @@ return [
         /*
          * Package Service Providers...
          */
+        PaypalClientProvider::class,
 
         /*
          * Application Service Providers...

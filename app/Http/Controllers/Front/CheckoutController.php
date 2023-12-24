@@ -30,6 +30,16 @@ class CheckoutController extends Controller
         if (count($items) == 0) {
             return redirect()->route('shop')->with('error', 'You must add products to cart first');
         }
+        $data = $request->validate([
+            'payment_method' => 'required|in:cash,paypal',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'city' => 'required|string',
+            'address' => 'required|string',
+            'postal_code' => 'nullable|string',
+            'more_info' => 'nullable|string',
+        ]);
 
         DB::beginTransaction();
         try {
@@ -40,16 +50,7 @@ class CheckoutController extends Controller
                 $total += $item['quantity'] * $item['price'];
             }
 
-            $data = $request->validate([
-                'payment_method' => 'required|in:cash,paypal',
-                'name' => 'required|string',
-                'email' => 'required|email',
-                'phone' => 'required|string',
-                'city' => 'required|string',
-                'address' => 'required|string',
-                'postal_code' => 'nullable|string',
-                'more_info' => 'nullable|string',
-            ]);
+
             // --------- create order ---------
             $order = Order::create([
                 'user_id' => auth()->user()->id,
@@ -66,9 +67,6 @@ class CheckoutController extends Controller
             ]);
 
             // --------- create order items ---------
-
-
-
             foreach ($items as $item) {
                 $order->items()->create([
                     'product_id' => $item['id'],
@@ -76,25 +74,13 @@ class CheckoutController extends Controller
                     'unit_price' => $item['price'],
                     'total' => $item['quantity'] * $item['price'],
                 ]);
-
-                // OrderItem::create([
-                //     'order_id' => $order->id,
-                //     'product_id' => $item['id'],
-                //     'quantity' => $item['quantity'],
-                //     'unit_price' => $item['price'],
-                //     'total' => $item['quantity'] * $item['price'],
-                // ]);
             }
 
+            if ($data['payment_method'] == 'paypal') {
+                DB::commit();
+                return redirect()->route('paypal.create', $order->id);
+            }
 
-            // $order->items()->createMany(array_map(function ($item) {
-            //     return [
-            //         'product_id' => $item['id'],
-            //         'quantity' => $item['quantity'],
-            //         'unit_price' => $item['price'],
-            //         'total' => $item['quantity'] * $item['price'],
-            //     ];
-            // }, $items));
             // --------- clear cart ---------   
             session()->forget('cart');
             DB::commit();
