@@ -14,6 +14,6 @@ class Order extends Model
 
     // ==================== RELATIONSHIPS ====================
     public function items(){
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class)->with('product');
     }
 }

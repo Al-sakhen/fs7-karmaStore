@@ -92,6 +92,53 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Orders
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.orders.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>New</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.orders.index', ['status' => 'approved']) }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Approved</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.orders.index', ['status' => 'paid']) }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Paid / Undelivered</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.orders.index', ['status' => 'unpaid']) }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Delievered / Unpaid</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.orders.index', 'completed') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Completed</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.orders.index', 'rejected') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rejected</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
