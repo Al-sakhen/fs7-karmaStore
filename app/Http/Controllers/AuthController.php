@@ -30,12 +30,20 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth('api')->attempt($credentials)) {
+        if (!auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
+        $token = auth('api')
+            ->claims([
+                'name' => auth('api')->user()->name,
+                'email' => auth('api')->user()->email,
+                'role' => auth('api')->user()->role,
+            ])
+            ->attempt($credentials);
 
         return $this->respondWithToken($token);
     }
